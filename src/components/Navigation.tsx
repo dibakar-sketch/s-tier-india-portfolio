@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,11 +14,11 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { label: 'Home', id: 'hero' },
-    { label: 'Portfolio', id: 'portfolio' },
-    { label: 'Services', id: 'services' },
-    { label: 'Process', id: 'process' },
-    { label: 'Contact', id: 'contact' },
+    { label: 'Home', id: 'hero', href: '/' },
+    { label: 'Portfolio', id: 'portfolio', href: '/#portfolio' },
+    { label: 'Services', id: 'services', href: '/#services' },
+    { label: 'Process', id: 'process', href: '/#process' },
+    { label: 'Contact', id: 'contact', href: '/#contact' },
   ];
 
   return (
@@ -38,14 +39,14 @@ export default function Navigation() {
           transition={{ delay: 0.2 }}
           className="text-2xl font-bold gradient-text"
         >
-          S-Tier India
+          <Link href="/">S-Tier India</Link>
         </motion.div>
 
         <div className="hidden md:flex gap-8">
           {navItems.map((item, index) => (
             <motion.a
               key={item.id}
-              href={`#${item.id}`}
+              href={item.href}
               onClick={(e) => handleScroll(e, item.id)}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -55,6 +56,24 @@ export default function Navigation() {
               {item.label}
             </motion.a>
           ))}
+          <motion.a
+            href="/jokes"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 + 5 * 0.1 }}
+            className="text-sm font-medium hover:text-neon-cyan transition-colors"
+          >
+            😂 Jokes
+          </motion.a>
+          <motion.a
+            href="/todos"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 + 6 * 0.1 }}
+            className="text-sm font-medium hover:text-neon-cyan transition-colors"
+          >
+            ✓ Tasks
+          </motion.a>
         </div>
 
         <motion.button
